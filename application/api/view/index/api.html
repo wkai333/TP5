@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>短信验证码接口测试</title>
+</head>
+<body>
+<form action="{$addr}" method='post' >
+	<div>
+		<label>电话号码：</label>
+		<input type="text" name="phone" id='phone'>
+	</div>
+	<div>
+		<label>验证码：</label>
+		<input type="text" name="code">
+		<div id='getCode'>点击获取验证码</div>
+	</div>	
+	<div>
+		<input type="submit" name="submit">
+	</div>
+</form>
+	
+	<script type="text/javascript" src='./../../../jquery-2.1.4.min.js'></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#getCode').click(function(){
+				var phone = $('#phone').val();
+				//alert(phone);
+				$.ajax({
+					type:'get',
+					url:'../../../send.php?phone='+phone,
+					success:function(msg){
+						if(msg == 1){
+							alert('短信验证码已发送，请注意查收');
+						}else{
+							//alert(msg);
+							alert('验证码发送出现问题，请稍候再试！');
+						}
+					}
+				});
+			});
+		});
+	</script>
+
+</body>
+</html>
